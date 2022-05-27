@@ -10,10 +10,8 @@ namespace csharp_biblioteca_db
     {
         public string Nome { get; set; }
         public List<Scaffale> ScaffaliBiblioteca { get; set; }
-       
 
         //public Dictionary<string,Utente> MioDizionario;
-
 
     public Biblioteca(string Nome)
         {
@@ -49,7 +47,18 @@ namespace csharp_biblioteca_db
         }
 
 
+        public void AggiungiDvd(long codice, string titolo, string settore, string scaffale, int durata, List<Autore> listaAutori)
+        {
+            DVD mioDvd = new DVD(codice, titolo, settore, scaffale, durata);
+            mioDvd.Stato = Stato.Disponibile;
 
+            DB.DvdAdd(mioDvd, listaAutori);
+        }
+
+        public void CercaDocumentoPerAutore(string nome, string cognome)
+        {
+            DB.GetAllDocumentByAuthor(nome, cognome);
+        }
         public int GestisciOperazioniBiblioteca(int iCodiceOperazione)
         {
             List<Documento> lResult;
